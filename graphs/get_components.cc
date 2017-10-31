@@ -1,7 +1,7 @@
 #include "../headers/utils.hh"
 #include "../headers/timer.hh"
 #include "../headers/graph.hh"
-// #include "thread_pool.hh"
+// #include "../headers/thread_pool.hh"
 // #include "safe_deque.hh"
 
 #include <iostream>
@@ -18,9 +18,12 @@ int main(int argc, char ** argv) {
   }
 
   graph G(argv[1]);
+  G.print_graph();
+
   //get not really all the components but the cluster of nodes that are
   //almost connected its made by an BFS
   vector<int> components = G.get_components();
-  cout << "components and their sizes: ";
+  cout << components.size() << " components and their sizes are: ";
   for (auto i : components) cout << i << " "; cout << endl;
+
 }

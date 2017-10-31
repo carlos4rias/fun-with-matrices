@@ -76,6 +76,32 @@ public:
     }
   }
 
+  void dijkstra(int node, unordered_map<int, map<int, int> > &assp) {
+    map<int, int> distances;
+    priority_queue<edge> PQ;
+    distances[node] = 0;
+    PQ.push(edge(node, 0));
+    while (!PQ.empty()) {
+      edge tm = PQ.top();
+      PQ.pop();
+      for (int i = 0; i < G[tm.to].size(); i++) {
+        int next = G[tm.to][i].to;
+        int c_w  = G[tm.to][i].w + tm.w;
+        if (distances.count(next)) {
+          if (distances[next] > c_w) {
+            distances[next] = c_w;
+            PQ.push(edge(next, c_w));
+          }
+        } else {
+          distances[next] = c_w;
+          PQ.push(edge(next, c_w));
+        }
+      }
+    }
+    assp[node] = distances;
+    return;
+  }
+
   int bfs (int node, std::vector<bool> &vis) {
     // std::cout << node << std::endl;
     std::queue<int> Q;
